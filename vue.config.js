@@ -35,6 +35,15 @@ module.exports = {
     overlay: {
       warnings: false,
       errors: true
+    },
+    // 跨域启用代理
+    proxy: {
+      '/api': {
+        // 代理地址
+        target: 'http://ihrm-java.itheima.net/api',
+        // 是否跨域
+        changeOrigin: true
+      }
     }
   },
   configureWebpack: {
