@@ -40,7 +40,7 @@ module.exports = {
     proxy: {
       '/api': {
         // 代理地址
-        target: 'http://ihrm-java.itheima.net/api',
+        target: 'http://42.192.129.12:3001',
         // 是否跨域
         changeOrigin: true
       }
