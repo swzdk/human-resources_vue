@@ -106,7 +106,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['user', 'login']),
+    ...mapActions('user', ['login']),
     showPwd() {
       if (this.passwordType === 'password') {
         this.passwordType = ''
@@ -128,6 +128,7 @@ export default {
         this.$router.push({ path: this.redirect || '/' })
         this.loading = false
       } catch (e) {
+        console.log(e)
         this.loading = false
       }
     }

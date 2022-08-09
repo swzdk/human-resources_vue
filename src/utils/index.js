@@ -115,3 +115,44 @@ export function param2Obj(url) {
   })
   return obj
 }
+
+export function getChildrenArray(array) {
+  // 构建要返回的数组
+  const arr = []
+  const map = {}
+  // 初步构建map结构
+  array.forEach((item) => {
+    if (!item.children) {
+      // 添加children数组
+      item.children = []
+    }
+    map[item.id] = item
+  })
+  array.forEach((item) => {
+    // 子项有pid指向的即为父结构
+    const parent = map[item.pid]
+    // 如果map结构中存在，添加进去
+    if (parent) {
+      parent.children.push(item)
+    } else {
+      // 如果不存在pid，说明item自己就是父结构
+      arr.push(item)
+    }
+  })
+  return arr
+}
+
+export function getChildrenArrayByID(array, rootId) {
+  // 创建数组
+  const arr = []
+  // 遍历查找
+  array.forEach((item) => {
+    if (item.pid === rootId) {
+      // 如果确定是父节点，在往下查找，传入的节点即当前父节点id
+      const childrenArr = getChildrenArrayByID(array, item.id)
+      item.children = childrenArr
+      arr.push(item)
+    }
+  })
+  return arr
+}
